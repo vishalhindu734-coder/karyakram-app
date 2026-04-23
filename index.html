@@ -128,31 +128,6 @@
 <div style="padding: 20px;">
     <button class="action-btn type=button save-btn" onclick="saveData()">डेटा सुरक्षित करें (Save to Cloud)</button>
 </div>
-    <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyA4sMo_6YSgCdAoz3tCUeVmT84lUod9U4w",
-    authDomain: "karyakram-db.firebaseapp.com",
-    databaseURL: "https://karyakram-db-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "karyakram-db",
-    storageBucket: "karyakram-db.firebasestorage.app",
-    messagingSenderId: "757487909660",
-    appId: "1:757487909660:web:40f023d513c699f34cd8d9",
-    measurementId: "G-FHVRHWB1HJ"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-    </script>
-<script src="app.js"></script>
-
+<script src="app-global.js"></script>
 </body>
 </html>
