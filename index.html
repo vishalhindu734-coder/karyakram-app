@@ -68,9 +68,9 @@
 </div>
 
 <div id="overview" class="tab-content active">
-    <div class="form-group"><label>कार्यक्रम का नाम</label><input type="text" id="eventName"></div>
-    <div class="form-group"><label>दिनांक एवं समय</label><input type="text" id="eventDate"></div>
-    <div class="form-group"><label>खंड / मंडल / ग्राम</label><input type="text" id="eventLocation"></div>
+    <div class="form-group"><label>कार्यक्रम का नाम</label><input type="text" id="eventName" placeholder="जैसे: अभ्यास वर्ग"></div>
+    <div class="form-group"><label>दिनांक एवं समय</label><input type="text" id="eventDate" placeholder="जैसे: 25 मई, सुबह 9 बजे"></div>
+    <div class="form-group"><label>खंड / मंडल / ग्राम</label><input type="text" id="eventLocation" placeholder="जैसे: गोहाना"></div>
     <div class="form-group"><label>स्थान</label><input type="text" id="eventVenue"></div>
     <div class="form-group"><label>अपेक्षित उपस्थिति</label><input type="number" id="eventAttendance"></div>
 </div>
@@ -126,13 +126,13 @@
 </div>
 
 <div style="padding: 20px;">
-    <button class="action-btn save-btn" onclick="saveData()">डेटा सुरक्षित करें (Save Offline)</button>
+    <button class="action-btn save-btn" onclick="saveData()">डेटा सुरक्षित करें (Save to Cloud)</button>
 </div>
-    
+
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
-    
+
 <script src="app.js"></script>
+
 </body>
 </html>
-
