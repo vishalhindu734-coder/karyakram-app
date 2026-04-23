@@ -47,21 +47,27 @@ function addRow(tableId, colCount) {
 
 // 4. Cloud Save Logic
 function saveData() {
-    // Gather data from the overview tab
+    let eventNameVal = document.getElementById('eventName').value;
+    
+    // Quick check to make sure they typed at least the name
+    if (!eventNameVal) {
+        alert("कृपया कम से कम कार्यक्रम का नाम दर्ज करें! (Please enter event name)");
+        return;
+    }
+
     let eventData = {
-        eventName: document.getElementById('eventName').value,
-        eventDate: document.getElementById('eventDate').value,
-        eventLocation: document.getElementById('eventLocation').value,
-        eventVenue: document.getElementById('eventVenue').value,
-        eventAttendance: document.getElementById('eventAttendance').value,
+        eventName: eventNameVal,
+        eventDate: document.getElementById('eventDate').value || "",
+        eventLocation: document.getElementById('eventLocation').value || "",
+        eventVenue: document.getElementById('eventVenue').value || "",
+        eventAttendance: document.getElementById('eventAttendance').value || "",
         timestamp: new Date().toISOString()
     };
 
-    // Push the data to the Firebase Realtime Database
+    // Push the data
     db.ref('karyakram_events').push(eventData)
       .then(() => {
           alert("डेटा सफलतापूर्वक क्लाउड पर सुरक्षित कर लिया गया है! (Saved to Cloud)");
-          // Clear the form fields after successful save
           document.getElementById('eventName').value = "";
           document.getElementById('eventDate').value = "";
           document.getElementById('eventLocation').value = "";
@@ -69,7 +75,7 @@ function saveData() {
           document.getElementById('eventAttendance').value = "";
       })
       .catch((error) => {
-          alert("त्रुटि (Error): " + error.message);
+          alert("Error: " + error.message);
       });
 }
 
@@ -77,7 +83,7 @@ function saveData() {
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('Service Worker Registered'))
-            .catch(err => console.log('Service Worker Failed', err));
+            .then(reg => console.log('SW Registered'))
+            .catch(err => console.log('SW Failed', err));
     });
 }
