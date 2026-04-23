@@ -1,5 +1,4 @@
 // 1. Initialize Firebase
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyA4sMo_6YSgCdAoz3tCUeVmT84lUod9U4w",
   authDomain: "karyakram-db.firebaseapp.com",
@@ -11,9 +10,8 @@ const firebaseConfig = {
   measurementId: "G-FHVRHWB1HJ"
 };
 
-// Initialize the app and database
-initializeApp(firebaseConfig);
-const db = getDatabase();
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
 // 2. Tab Navigation Logic
 function openTab(evt, tabName) {
@@ -37,11 +35,11 @@ function addRow(tableId, colCount) {
     for (let i = 0; i < colCount; i++) {
         let cell = row.insertCell(i);
         let input = document.createElement("input");
-        
+
         if (tableId === 'taskTable' && i === 2) input.type = "date";
         else if ((tableId === 'incomeTable' || tableId === 'expenseTable') && i === 2) input.type = "number";
         else input.type = "text";
-        
+
         input.className = "cell-input";
         cell.appendChild(input);
     }
@@ -49,10 +47,8 @@ function addRow(tableId, colCount) {
 
 // 4. Cloud Save Logic
 function saveData() {
-    window.saveData = saveData;
     let eventNameVal = document.getElementById('eventName').value;
-    
-    // Quick check to make sure they typed at least the name
+
     if (!eventNameVal) {
         alert("कृपया कम से कम कार्यक्रम का नाम दर्ज करें! (Please enter event name)");
         return;
@@ -67,11 +63,10 @@ function saveData() {
         timestamp: new Date().toISOString()
     };
 
-    // Push the data
-  console.log
+    console.log("Saving data...");
     db.ref('karyakram_events').push(eventData)
       .then(() => {
-          console.log
+          console.log("Data saved!");
           alert("डेटा सफलतापूर्वक क्लाउड पर सुरक्षित कर लिया गया है! (Saved to Cloud)");
           document.getElementById('eventName').value = "";
           document.getElementById('eventDate').value = "";
@@ -92,4 +87,3 @@ if ('serviceWorker' in navigator) {
             .catch(err => console.log('SW Failed', err));
     });
 }
-
