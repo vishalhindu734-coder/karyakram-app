@@ -67,6 +67,7 @@ function saveData() {
     };
 
     // Push the data
+  console.log
     db.ref('karyakram_events').push(eventData)
       .then(() => {
           console.log
