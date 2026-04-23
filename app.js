@@ -69,6 +69,7 @@ function saveData() {
     // Push the data
     db.ref('karyakram_events').push(eventData)
       .then(() => {
+          console.log
           alert("डेटा सफलतापूर्वक क्लाउड पर सुरक्षित कर लिया गया है! (Saved to Cloud)");
           document.getElementById('eventName').value = "";
           document.getElementById('eventDate').value = "";
