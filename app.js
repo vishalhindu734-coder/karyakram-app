@@ -1,4 +1,19 @@
-// Tab Navigation
+// 1. Initialize Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyA4sMo_6YSgCdAoz3tCUeVmT84lUod9U4w",
+  authDomain: "karyakram-db.firebaseapp.com",
+  projectId: "karyakram-db",
+  storageBucket: "karyakram-db.firebasestorage.app",
+  messagingSenderId: "757487909660",
+  appId: "1:757487909660:web:40f023d513c699f34cd8d9",
+  measurementId: "G-FHVRHWB1HJ"
+};
+
+// Initialize the app and database
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+// 2. Tab Navigation Logic
 function openTab(evt, tabName) {
     let i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tab-content");
@@ -13,7 +28,7 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-// Add dynamic rows to tables
+// 3. Dynamic Rows Logic
 function addRow(tableId, colCount) {
     let table = document.getElementById(tableId);
     let row = table.insertRow(-1);
@@ -21,7 +36,6 @@ function addRow(tableId, colCount) {
         let cell = row.insertCell(i);
         let input = document.createElement("input");
         
-        // Handle specific inputs like dates/numbers if needed
         if (tableId === 'taskTable' && i === 2) input.type = "date";
         else if ((tableId === 'incomeTable' || tableId === 'expenseTable') && i === 2) input.type = "number";
         else input.type = "text";
@@ -31,18 +45,35 @@ function addRow(tableId, colCount) {
     }
 }
 
-// Simple Offline Save logic using LocalStorage
+// 4. Cloud Save Logic
 function saveData() {
-    // In a real PWA, you would iterate through inputs and save to LocalStorage or IndexedDB
-    let overviewData = {
+    // Gather data from the overview tab
+    let eventData = {
         eventName: document.getElementById('eventName').value,
-        eventLocation: document.getElementById('eventLocation').value
+        eventDate: document.getElementById('eventDate').value,
+        eventLocation: document.getElementById('eventLocation').value,
+        eventVenue: document.getElementById('eventVenue').value,
+        eventAttendance: document.getElementById('eventAttendance').value,
+        timestamp: new Date().toISOString()
     };
-    localStorage.setItem('rss_event_data', JSON.stringify(overviewData));
-    alert("डेटा सफलतापूर्वक सुरक्षित कर लिया गया है! (Data Saved Offline)");
+
+    // Push the data to the Firebase Realtime Database
+    db.ref('karyakram_events').push(eventData)
+      .then(() => {
+          alert("डेटा सफलतापूर्वक क्लाउड पर सुरक्षित कर लिया गया है! (Saved to Cloud)");
+          // Clear the form fields after successful save
+          document.getElementById('eventName').value = "";
+          document.getElementById('eventDate').value = "";
+          document.getElementById('eventLocation').value = "";
+          document.getElementById('eventVenue').value = "";
+          document.getElementById('eventAttendance').value = "";
+      })
+      .catch((error) => {
+          alert("त्रुटि (Error): " + error.message);
+      });
 }
 
-// Register Service Worker for Offline PWA Support
+// 5. Offline Service Worker Registration
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
@@ -50,4 +81,3 @@ if ('serviceWorker' in navigator) {
             .catch(err => console.log('Service Worker Failed', err));
     });
 }
-
