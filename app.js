@@ -13,7 +13,7 @@ const firebaseConfig = {
 
 // Initialize the app and database
 initializeApp(firebaseConfig);
-const db = firebase.database();
+const db = getDatabase();
 
 // 2. Tab Navigation Logic
 function openTab(evt, tabName) {
