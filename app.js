@@ -1,7 +1,9 @@
 // 1. Initialize Firebase
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyA4sMo_6YSgCdAoz3tCUeVmT84lUod9U4w",
   authDomain: "karyakram-db.firebaseapp.com",
+  databaseURL: "https://karyakram-db-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "karyakram-db",
   storageBucket: "karyakram-db.firebasestorage.app",
   messagingSenderId: "757487909660",
