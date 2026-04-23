@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rss-plan-v1';
+const CACHE_NAME = 'rss-plan-v2';
 const urlsToCache = [
   './index.html',
   './app.js',
