@@ -49,6 +49,7 @@ function addRow(tableId, colCount) {
 
 // 4. Cloud Save Logic
 function saveData() {
+    window.saveData = saveData;
     let eventNameVal = document.getElementById('eventName').value;
     
     // Quick check to make sure they typed at least the name
